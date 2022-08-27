@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stella", "Stella\Stella.csproj", "{6E983B63-7DB1-404A-8B44-EFAAE8B04B00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stella.Example.Polling", "Stella.Example.Polling\Stella.Example.Polling.csproj", "{066EA0DB-C1DD-45A4-B1A8-93CE74B7712C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E983B63-7DB1-404A-8B44-EFAAE8B04B00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E983B63-7DB1-404A-8B44-EFAAE8B04B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E983B63-7DB1-404A-8B44-EFAAE8B04B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E983B63-7DB1-404A-8B44-EFAAE8B04B00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{066EA0DB-C1DD-45A4-B1A8-93CE74B7712C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{066EA0DB-C1DD-45A4-B1A8-93CE74B7712C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{066EA0DB-C1DD-45A4-B1A8-93CE74B7712C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{066EA0DB-C1DD-45A4-B1A8-93CE74B7712C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {463766AD-BA33-4CC0-9BAF-F72E7DD428D8}
+	EndGlobalSection
+EndGlobal

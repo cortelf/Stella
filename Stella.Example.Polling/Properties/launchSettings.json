@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Stella.Example.Polling": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "BOT_TOKEN": "594411114:AAFJA9LS5Gj2Vf6iSLf7JqDfEvUo859dV6c"
+      }
+    }
+  }
+}
