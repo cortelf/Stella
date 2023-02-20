@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Stella
 {
     public interface IControllerManager
     {
-        Task ProcessUpdate(Update update, ITelegramHandlerScope scope);
+        Task ProcessUpdate(Update update, IContainer scope);
 
         void RegisterController(Type controller);
     }

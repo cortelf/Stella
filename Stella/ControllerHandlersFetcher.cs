@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -21,15 +22,11 @@ namespace Stella
             var validMethods = type.GetMethods().Where((m) =>
             {
                 var parameters = m.GetParameters();
-                if (parameters.Length != 2)
+                if (parameters.Length != 1)
                 {
                     return false;
                 }
                 if (parameters[0].ParameterType != typeof(Update))
-                {
-                    return false;
-                }
-                if (parameters[1].ParameterType != typeof(ITelegramHandlerScope))
                 {
                     return false;
                 }
@@ -38,8 +35,8 @@ namespace Stella
 
             foreach (var methodInfo in validMethods)
             {
-                var func = (Func<Update, ITelegramHandlerScope, Task>)
-                    Delegate.CreateDelegate(typeof(Func<Update, ITelegramHandlerScope, Task>), Activator.CreateInstance(type), methodInfo);
+                var func = (IContainer b) => (Func<Update, Task>)
+                    Delegate.CreateDelegate(typeof(Func<Update, Task>), b.Resolve(type), methodInfo);
 
                 var filterAttributes = methodInfo.GetCustomAttributes(typeof(FilterAttribute), true).Select(x => (x as ITelegramHandlerFilter)!).ToList();
 

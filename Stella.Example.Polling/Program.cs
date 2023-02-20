@@ -1,4 +1,5 @@
-﻿using Stella;
+﻿using Autofac;
+using Stella;
 using Stella.Example.Polling;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
@@ -10,7 +11,10 @@ var token = Environment.GetEnvironmentVariable("BOT_TOKEN")!;
 var botClient = new TelegramBotClient(token);
 
 var app = new StellaApp();
+
 app.AddControllers();
+app.DependencyInjection.RegisterInstance<ITelegramBotClient>(botClient);
+app.Build();
 
 var receiverOptions = new ReceiverOptions
 {

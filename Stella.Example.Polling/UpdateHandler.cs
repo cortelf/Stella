@@ -14,10 +14,7 @@ public class UpdateHandler : IUpdateHandler
     
     public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
     {
-        var scope = new HandlerScope();
-        scope.Add(botClient);
-
-        await _app.ProcessUpdate(update, scope);
+        await _app.ProcessUpdate(update);
     }
 
     public async Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)

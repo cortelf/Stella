@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,17 +12,28 @@ namespace Stella
     {
         public IControllerManager ControllerManager { get; set; } = new TelegramControllerManager(new ControllerHandlersFetcher());
         public IControllersFetcher ControllersFetcher { get; set; } = new ControllersFetcher();
-        public StellaApp() { }
+        public ContainerBuilder DependencyInjection { get; set; } = new ContainerBuilder();
+        public IContainer? DependencyInjectionContainer { get; set; }
+
+        public StellaApp() {}
         public void AddControllers()
         {
             foreach (var c in ControllersFetcher.GetControllers())
             {
                 ControllerManager.RegisterController(c);
+                DependencyInjection.RegisterType(c);
             }
         }
-        public async Task ProcessUpdate(Telegram.Bot.Types.Update update, ITelegramHandlerScope scope)
+        public void Build()
         {
-            await ControllerManager.ProcessUpdate(update, scope);
+            DependencyInjectionContainer = DependencyInjection.Build();
+        }
+        public async Task ProcessUpdate(Telegram.Bot.Types.Update update)
+        {
+            if (DependencyInjectionContainer == null)
+                throw new ArgumentNullException(nameof(DependencyInjectionContainer));
+
+            await ControllerManager.ProcessUpdate(update, DependencyInjectionContainer);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +11,7 @@ namespace Stella
     public abstract class TelegramHandlerFilter : ITelegramHandlerFilter
     {
         public TelegramHandlerFilterData FilterData { get; private set; }
-        public TelegramHandlerFilter(Func<Update, ITelegramHandlerScope, Task> func)
-        {
-            FilterData = new TelegramHandlerFilterData()
-            {
-                Func = func,
-                Filters = new List<ITelegramHandlerFilter>() { this }
-            };
-        }
+
 
         public TelegramHandlerFilter(TelegramHandlerFilter filter)
         {
@@ -26,6 +20,6 @@ namespace Stella
         }
 
 
-        public abstract bool Compare(Update update, ITelegramHandlerScope scope);
+        public abstract bool Compare(Update update, IContainer container);
     }
 }

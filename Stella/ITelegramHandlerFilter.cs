@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace Stella
 {
     public interface ITelegramHandlerFilter
     {
-        bool Compare(Update update, ITelegramHandlerScope scope);
+        bool Compare(Update update, IContainer container);
     }
 }
