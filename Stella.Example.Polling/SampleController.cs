@@ -4,25 +4,30 @@ using Telegram.Bot.Types;
 
 namespace Stella.Example.Polling;
 
-public class SampleController : TelegramController
+[BotController]
+public class SampleController
 {
-    [CommandFilter("/start")]
-    public async Task OnStart(Update update, ITelegramHandlerScope scope)
+    private ITelegramBotClient _bot;
+
+    public SampleController(ITelegramBotClient bot)
     {
-        var bot = scope.Get<ITelegramBotClient>();
-        await bot!.SendTextMessageAsync(update.Message!.From!.Id, "Hello from Stella!");
+        _bot = bot;
+    }
+
+    [CommandFilter("/start")]
+    public async Task OnStart(Update update)
+    {
+        await _bot.SendTextMessageAsync(update.Message!.From!.Id, "Hello from Stella!");
     }
 
     [CommandFilter("/help")]
-    public async Task OnHelp(Update update, ITelegramHandlerScope scope)
+    public async Task OnHelp(Update update)
     {
-        var bot = scope.Get<ITelegramBotClient>();
-        await bot!.SendTextMessageAsync(update.Message!.From!.Id, "Do you need help?");
+        await _bot.SendTextMessageAsync(update.Message!.From!.Id, "Do you need help?");
     }
 
-    public async Task OnAnyMessage(Update update, ITelegramHandlerScope scope)
+    public async Task OnAnyMessage(Update update)
     {
-        var bot = scope.Get<ITelegramBotClient>();
-        await bot!.SendTextMessageAsync(update.Message!.From!.Id, update.Message!.Text!);
+        await _bot.SendTextMessageAsync(update.Message!.From!.Id, update.Message!.Text!);
     }
 }

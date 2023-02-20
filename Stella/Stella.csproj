@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,7 +8,7 @@
     <Authors>CortelF</Authors>
     <Copyright>Copyright (c) CortelF 2022</Copyright>
     <Version>0.0.1</Version>
-    <PackageLicenseFile>G:\Projects\Sharp\Stella\LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageTags>telegram,telegram bot</PackageTags>
     <PackageProjectUrl>https://github.com/cortelf/Stella</PackageProjectUrl>
@@ -17,7 +17,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Telegram.Bot" Version="18.0.0" />
+	  <None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
+	  <PackageReference Include="Autofac" Version="6.5.0" />
+	  <PackageReference Include="Telegram.Bot" Version="18.0.0" />
   </ItemGroup>
 
 </Project>
