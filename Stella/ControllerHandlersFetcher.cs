@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -9,18 +8,17 @@ using Telegram.Bot.Types;
 
 namespace Stella
 {
-    public abstract class TelegramController : ITelegramController
+    public class ControllerHandlersFetcher : IControllerHandlersFetcher
     {
-        public IList<TelegramHandlerFilterData> GetHandlers()
+        public IList<TelegramHandlerFilterData> GetHandlers(Type type)
         {
             var result = new List<TelegramHandlerFilterData>();
 
-            var classAttributes = GetType().GetCustomAttributes(typeof(FilterAttribute), true)
+            var classAttributes = type.GetCustomAttributes(typeof(FilterAttribute), true)
                 .Select(x => (x as ITelegramHandlerFilter)!).ToList();
-            var type = GetType();
-            var methods = GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
+            var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance);
 
-            var validMethods = GetType().GetMethods().Where((m) =>
+            var validMethods = type.GetMethods().Where((m) =>
             {
                 var parameters = m.GetParameters();
                 if (parameters.Length != 2)
@@ -41,7 +39,7 @@ namespace Stella
             foreach (var methodInfo in validMethods)
             {
                 var func = (Func<Update, ITelegramHandlerScope, Task>)
-                    Delegate.CreateDelegate(typeof(Func<Update, ITelegramHandlerScope, Task>), this, methodInfo);
+                    Delegate.CreateDelegate(typeof(Func<Update, ITelegramHandlerScope, Task>), Activator.CreateInstance(type), methodInfo);
 
                 var filterAttributes = methodInfo.GetCustomAttributes(typeof(FilterAttribute), true).Select(x => (x as ITelegramHandlerFilter)!).ToList();
 
@@ -54,7 +52,6 @@ namespace Stella
             }
 
             return result;
-
         }
     }
 }

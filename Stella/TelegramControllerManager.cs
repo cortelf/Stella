@@ -9,6 +9,11 @@ namespace Stella
 {
     public class TelegramControllerManager : IControllerManager
     {
+        private IControllerHandlersFetcher _controllerHandlersFetcher;
+        public TelegramControllerManager(IControllerHandlersFetcher controllerHandlersFetcher) {
+            _controllerHandlersFetcher = controllerHandlersFetcher;
+        }
+
         private readonly IList<TelegramHandlerFilterData> _handlers = new List<TelegramHandlerFilterData>();
         public async Task ProcessUpdate(Update update, ITelegramHandlerScope scope)
         {
@@ -31,9 +36,9 @@ namespace Stella
             }
         }
 
-        public void RegisterController(ITelegramController controller)
+        public void RegisterController(Type controller)
         {
-            foreach (var data in controller.GetHandlers())
+            foreach (var data in _controllerHandlersFetcher.GetHandlers(controller))
             {
                 _handlers.Add(data);
             }

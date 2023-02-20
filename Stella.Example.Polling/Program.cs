@@ -9,15 +9,15 @@ using Telegram.Bot.Types.Enums;
 var token = Environment.GetEnvironmentVariable("BOT_TOKEN")!;
 var botClient = new TelegramBotClient(token);
 
-var controllerManager = new TelegramControllerManager();
-controllerManager.RegisterController(new SampleController());
+var app = new StellaApp();
+app.AddControllers();
 
 var receiverOptions = new ReceiverOptions
 {
     AllowedUpdates = Array.Empty<UpdateType>() // receive all update types
 };
 botClient.StartReceiving(
-    updateHandler: new UpdateHandler(controllerManager: controllerManager),
+    updateHandler: new UpdateHandler(app: app),
     receiverOptions: receiverOptions
 );
 Console.ReadLine();

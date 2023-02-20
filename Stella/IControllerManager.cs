@@ -11,6 +11,6 @@ namespace Stella
     {
         Task ProcessUpdate(Update update, ITelegramHandlerScope scope);
 
-        void RegisterController(ITelegramController controller);
+        void RegisterController(Type controller);
     }
 }

@@ -6,10 +6,10 @@ namespace Stella.Example.Polling;
 
 public class UpdateHandler : IUpdateHandler
 {
-    private readonly IControllerManager _controllerManager;
-    public UpdateHandler(IControllerManager controllerManager)
+    private readonly StellaApp _app;
+    public UpdateHandler(StellaApp app)
     {
-        _controllerManager = controllerManager;
+        _app = app;
     }
     
     public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
@@ -17,7 +17,7 @@ public class UpdateHandler : IUpdateHandler
         var scope = new HandlerScope();
         scope.Add(botClient);
 
-        await _controllerManager.ProcessUpdate(update, scope);
+        await _app.ProcessUpdate(update, scope);
     }
 
     public async Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)

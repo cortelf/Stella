@@ -4,7 +4,8 @@ using Telegram.Bot.Types;
 
 namespace Stella.Example.Polling;
 
-public class SampleController : TelegramController
+[BotController]
+public class SampleController
 {
     [CommandFilter("/start")]
     public async Task OnStart(Update update, ITelegramHandlerScope scope)

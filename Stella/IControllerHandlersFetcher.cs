@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Stella
 {
-    public interface ITelegramController
+    public interface IControllerHandlersFetcher
     {
-        IList<TelegramHandlerFilterData> GetHandlers();
+        IList<TelegramHandlerFilterData> GetHandlers(Type type);
     }
 }
