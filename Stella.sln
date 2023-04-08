@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stella", "Stella\Stella.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stella.Example.Polling", "Stella.Example.Polling\Stella.Example.Polling.csproj", "{066EA0DB-C1DD-45A4-B1A8-93CE74B7712C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stella.Polling", "Stella.Polling\Stella.Polling.csproj", "{C30FB900-C85B-4960-A746-1FA6D8FF26C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{066EA0DB-C1DD-45A4-B1A8-93CE74B7712C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{066EA0DB-C1DD-45A4-B1A8-93CE74B7712C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{066EA0DB-C1DD-45A4-B1A8-93CE74B7712C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C30FB900-C85B-4960-A746-1FA6D8FF26C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C30FB900-C85B-4960-A746-1FA6D8FF26C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C30FB900-C85B-4960-A746-1FA6D8FF26C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C30FB900-C85B-4960-A746-1FA6D8FF26C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

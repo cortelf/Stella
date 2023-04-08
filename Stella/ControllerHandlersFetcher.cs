@@ -1,5 +1,4 @@
-﻿using Autofac;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -35,8 +34,8 @@ namespace Stella
 
             foreach (var methodInfo in validMethods)
             {
-                var func = (IContainer b) => (Func<Update, Task>)
-                    Delegate.CreateDelegate(typeof(Func<Update, Task>), b.Resolve(type), methodInfo);
+                var func = (IServiceProvider b) => (Func<Update, Task>)
+                    Delegate.CreateDelegate(typeof(Func<Update, Task>), b.GetService(type), methodInfo);
 
                 var filterAttributes = methodInfo.GetCustomAttributes(typeof(FilterAttribute), true).Select(x => (x as ITelegramHandlerFilter)!).ToList();
 

@@ -1,5 +1,4 @@
-﻿using Autofac;
-using Telegram.Bot.Types;
+﻿using Telegram.Bot.Types;
 
 namespace Stella.Filters;
 
@@ -14,7 +13,7 @@ public class CommandFilter : MessageWithTextFilter
     {
         _commands = new List<string>() {command};
     }
-    public override bool Compare(Update update, IContainer container)
+    public override bool Compare(Update update, IServiceProvider container)
     {
         return base.Compare(update, container) && _commands.Any(command => update.Message!.Text!.StartsWith(command));
     }
