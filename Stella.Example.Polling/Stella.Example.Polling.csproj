@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Stella.Polling\Stella.Polling.csproj" />
     <ProjectReference Include="..\Stella\Stella.csproj" />
   </ItemGroup>
 

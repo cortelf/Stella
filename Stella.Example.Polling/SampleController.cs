@@ -1,4 +1,5 @@
-﻿using Stella.Filters;
+﻿using Microsoft.Extensions.Logging;
+using Stella.Filters;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -8,15 +9,18 @@ namespace Stella.Example.Polling;
 public class SampleController
 {
     private ITelegramBotClient _bot;
+    private ILogger<SampleController> _logger;
 
-    public SampleController(ITelegramBotClient bot)
+    public SampleController(ITelegramBotClient bot, ILogger<SampleController> logger)
     {
         _bot = bot;
+        _logger = logger;
     }
 
     [CommandFilter("/start")]
     public async Task OnStart(Update update)
     {
+        _logger.LogInformation("/start from {UserId}", update.Message!.From!.Id);
         await _bot.SendTextMessageAsync(update.Message!.From!.Id, "Hello from Stella!");
     }
 

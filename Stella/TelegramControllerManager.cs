@@ -1,5 +1,4 @@
-﻿using Autofac;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +15,7 @@ namespace Stella
         }
 
         private readonly IList<TelegramHandlerFilterData> _handlers = new List<TelegramHandlerFilterData>();
-        public async Task ProcessUpdate(Update update, IContainer scope)
+        public async Task ProcessUpdate(Update update, IServiceProvider scope)
         {
             foreach (var handler in _handlers)
             {

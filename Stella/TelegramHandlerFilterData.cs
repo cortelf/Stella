@@ -1,5 +1,4 @@
-﻿using Autofac;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +9,7 @@ namespace Stella
 {
     public class TelegramHandlerFilterData
     {
-        public Func<IContainer, Func<Update, Task>> Func { get; set; } = null!;
+        public Func<IServiceProvider, Func<Update, Task>> Func { get; set; } = null!;
         public List<ITelegramHandlerFilter> Filters { get; set; } = new List<ITelegramHandlerFilter>();
     }
 }
