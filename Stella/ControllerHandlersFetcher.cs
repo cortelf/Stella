@@ -10,12 +10,14 @@ namespace Stella
 {
     public class ControllerHandlersFetcher : IControllerHandlersFetcher
     {
-        public IList<TelegramHandlerFilterData> GetHandlers(Type type)
+        public IList<TelegramHandlerData> GetHandlers(Type type)
         {
-            var result = new List<TelegramHandlerFilterData>();
+            var result = new List<TelegramHandlerData>();
 
-            var classAttributes = type.GetCustomAttributes(typeof(FilterAttribute), true)
+            var classFilterAttributes = type.GetCustomAttributes(typeof(FilterAttribute), true)
                 .Select(x => (x as ITelegramHandlerFilter)!).ToList();
+            var classMiddlewareAttributes = type.GetCustomAttributes(typeof(MiddlewareAttribute), true)
+                .Select(x => (x as MiddlewareAttribute)!).ToList();
             var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance);
 
             var validMethods = type.GetMethods().Where((m) =>
@@ -37,12 +39,16 @@ namespace Stella
                 var func = (IServiceProvider b) => (Func<Update, Task>)
                     Delegate.CreateDelegate(typeof(Func<Update, Task>), b.GetService(type), methodInfo);
 
-                var filterAttributes = methodInfo.GetCustomAttributes(typeof(FilterAttribute), true).Select(x => (x as ITelegramHandlerFilter)!).ToList();
+                var methodFilterAttributes = methodInfo.GetCustomAttributes(typeof(FilterAttribute), true)
+                    .Select(x => (x as ITelegramHandlerFilter)!).ToList();
+                var methodMiddlewareAttributes = methodInfo.GetCustomAttributes(typeof(MiddlewareAttribute), true)
+                    .Select(x => (x as MiddlewareAttribute)!).ToList();
 
-                var data = new TelegramHandlerFilterData()
+                var data = new TelegramHandlerData()
                 {
                     Func = func,
-                    Filters = classAttributes.Concat(filterAttributes).ToList()
+                    Filters = classFilterAttributes.Concat(methodFilterAttributes).ToList(),
+                    Middlewares = classMiddlewareAttributes.Concat(methodMiddlewareAttributes).ToList()
                 };
                 result.Add(data);
             }

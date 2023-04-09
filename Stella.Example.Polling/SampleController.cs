@@ -1,11 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using Stella.Filters;
+using Stella.Middlewares;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace Stella.Example.Polling;
 
 [BotController]
+[LoggingMiddleware]
 public class SampleController
 {
     private ITelegramBotClient _bot;

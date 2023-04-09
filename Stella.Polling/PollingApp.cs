@@ -23,7 +23,7 @@ public class PollingApp: IPollingApp
         Services.AddSingleton<PollingApp>(this);
         Services.AddSingleton<IUpdateHandler, UpdateHandler>();
         
-        ControllerManager = new TelegramControllerManager(new ControllerHandlersFetcher());
+        ControllerManager = new TelegramControllerManager(new ControllerHandlersFetcher(), new FilterResolver());
         ControllersFetcher =  new ControllersFetcher();
         SerilogLogger = new LoggerConfiguration().MinimumLevel.Information().WriteTo.Console().CreateLogger();
     }

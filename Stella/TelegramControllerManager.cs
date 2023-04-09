@@ -9,31 +9,28 @@ namespace Stella
 {
     public class TelegramControllerManager : IControllerManager
     {
-        private IControllerHandlersFetcher _controllerHandlersFetcher;
-        public TelegramControllerManager(IControllerHandlersFetcher controllerHandlersFetcher) {
+        private readonly IControllerHandlersFetcher _controllerHandlersFetcher;
+        private readonly IFilterResolver _filterResolver;
+        public TelegramControllerManager(IControllerHandlersFetcher controllerHandlersFetcher, IFilterResolver filterResolver)
+        {
             _controllerHandlersFetcher = controllerHandlersFetcher;
+            _filterResolver = filterResolver;
         }
 
-        private readonly IList<TelegramHandlerFilterData> _handlers = new List<TelegramHandlerFilterData>();
+        private readonly IList<TelegramHandlerData> _handlers = new List<TelegramHandlerData>();
         public async Task ProcessUpdate(Update update, IServiceProvider scope)
         {
-            foreach (var handler in _handlers)
+            var handlerAfterResolveFilters = _filterResolver.Resolve(_handlers, update, scope);
+            if (handlerAfterResolveFilters == null) return;
+            var lastHandler = handlerAfterResolveFilters.Func(scope);
+            IList<Func<Update, Task>> completedMiddlewares = new List<Func<Update, Task>> { lastHandler };
+            foreach (var middleware in handlerAfterResolveFilters.Middlewares.Reverse())
             {
-                var canBeUsed = true;
-                foreach (var filter in handler.Filters)
-                {
-                    if (!filter.Compare(update, scope))
-                    {
-                        canBeUsed = false;
-                        break;
-                    }
-                }
-                if (canBeUsed)
-                {
-                    await handler.Func(scope)(update);
-                    break;
-                }
+                var previousMiddleware = completedMiddlewares.First();
+                completedMiddlewares.Insert(0, (Update u) => middleware.Process(update, scope, previousMiddleware));
             }
+
+            await completedMiddlewares.First()(update);
         }
 
         public void RegisterController(Type controller)
