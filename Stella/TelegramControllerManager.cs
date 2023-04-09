@@ -17,11 +17,20 @@ namespace Stella
             _filterResolver = filterResolver;
         }
 
-        private readonly IList<TelegramHandlerFilterData> _handlers = new List<TelegramHandlerFilterData>();
+        private readonly IList<TelegramHandlerData> _handlers = new List<TelegramHandlerData>();
         public async Task ProcessUpdate(Update update, IServiceProvider scope)
         {
             var handlerAfterResolveFilters = _filterResolver.Resolve(_handlers, update, scope);
-            if (handlerAfterResolveFilters != null) await handlerAfterResolveFilters(scope)(update);
+            if (handlerAfterResolveFilters == null) return;
+            var lastHandler = handlerAfterResolveFilters.Func(scope);
+            IList<Func<Update, Task>> completedMiddlewares = new List<Func<Update, Task>> { lastHandler };
+            foreach (var middleware in handlerAfterResolveFilters.Middlewares.Reverse())
+            {
+                var previousMiddleware = completedMiddlewares.First();
+                completedMiddlewares.Insert(0, (Update u) => middleware.Process(update, scope, previousMiddleware));
+            }
+
+            await completedMiddlewares.First()(update);
         }
 
         public void RegisterController(Type controller)

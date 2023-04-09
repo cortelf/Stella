@@ -8,6 +8,6 @@ namespace Stella
 {
     public interface IControllerHandlersFetcher
     {
-        IList<TelegramHandlerFilterData> GetHandlers(Type type);
+        IList<TelegramHandlerData> GetHandlers(Type type);
     }
 }

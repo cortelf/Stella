@@ -7,9 +7,10 @@ using Telegram.Bot.Types;
 
 namespace Stella
 {
-    public class TelegramHandlerFilterData
+    public class TelegramHandlerData
     {
         public Func<IServiceProvider, Func<Update, Task>> Func { get; set; } = null!;
-        public List<ITelegramHandlerFilter> Filters { get; set; } = new List<ITelegramHandlerFilter>();
+        public IList<ITelegramHandlerFilter> Filters { get; set; } = new List<ITelegramHandlerFilter>();
+        public IList<MiddlewareAttribute> Middlewares { get; set; } = new List<MiddlewareAttribute>();
     }
 }
