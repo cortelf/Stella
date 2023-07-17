@@ -4,7 +4,7 @@ using Stella.Middlewares;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace Stella.Example.Polling;
+namespace Stella.Example.AspNetCore;
 
 [BotController]
 [LoggingMiddleware]
