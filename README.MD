@@ -6,8 +6,8 @@ See examples for more information
 
 ## TODO:
 
-- Middlewares
-- Expanding the scope object into controller constructors
-- Automatic search for controllers by attribute
-- Write tests
-- Write documentation
+- [x] Middlewares
+- [x] Expanding the scope object into controller constructors
+- [x] Automatic search for controllers by attribute
+- [ ] Write tests
+- [ ] Write documentation
