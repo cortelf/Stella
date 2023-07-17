@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 
@@ -17,7 +18,8 @@ public class UpdateHandler : IUpdateHandler
     
     public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
     {
-        await _app.ControllerManager.ProcessUpdate(update, _serviceProvider);
+        using var scope = _serviceProvider.CreateScope();
+        await _app.ControllerManager.ProcessUpdate(update, scope.ServiceProvider);
     }
 
     public async Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
