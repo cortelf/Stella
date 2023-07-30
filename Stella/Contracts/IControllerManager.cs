@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
-namespace Stella
+namespace Stella.Contracts
 {
     public interface IControllerManager
     {

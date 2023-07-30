@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using Stella.Contracts;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 

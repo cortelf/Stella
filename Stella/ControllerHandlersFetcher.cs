@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Stella.Contracts;
 using Telegram.Bot.Types;
 
 namespace Stella

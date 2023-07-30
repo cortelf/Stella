@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Newtonsoft.Json;
+using Stella.Contracts;
 using System.Diagnostics.CodeAnalysis;
 using Telegram.Bot.Requests.Abstractions;
 using Telegram.Bot.Types;

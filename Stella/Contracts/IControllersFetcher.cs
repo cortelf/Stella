@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stella
+namespace Stella.Contracts
 {
-    public interface IControllerHandlersFetcher
+    public interface IControllersFetcher
     {
-        IList<TelegramHandlerData> GetHandlers(Type type);
+        IList<Type> GetControllers();
     }
 }

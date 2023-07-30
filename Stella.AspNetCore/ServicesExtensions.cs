@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Stella.Contracts;
 
 namespace Stella.AspNetCore;
 

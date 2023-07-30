@@ -1,4 +1,5 @@
-﻿using Telegram.Bot.Types;
+﻿using Stella.Contracts;
+using Telegram.Bot.Types;
 
 namespace Stella;
 

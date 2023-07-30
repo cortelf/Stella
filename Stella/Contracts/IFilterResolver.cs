@@ -1,6 +1,6 @@
 ﻿using Telegram.Bot.Types;
 
-namespace Stella;
+namespace Stella.Contracts;
 
 public interface IFilterResolver
 {
