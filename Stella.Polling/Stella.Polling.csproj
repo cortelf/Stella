@@ -4,7 +4,26 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+		<IsPackable>true</IsPackable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>CortelF</Authors>
+		<Copyright>Copyright (c) CortelF 2023</Copyright>
+		<Version>0.0.2</Version>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageTags>telegram,telegram-bot</PackageTags>
+		<PackageProjectUrl>https://github.com/cortelf/Stella</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/cortelf/Stella</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Title>User-friendly Library for Polling Functionality with Stella</Title>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+    </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Stella\Stella.csproj" />

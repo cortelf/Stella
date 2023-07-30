@@ -6,18 +6,26 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>CortelF</Authors>
-    <Copyright>Copyright (c) CortelF 2022</Copyright>
-    <Version>0.0.1</Version>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <Copyright>Copyright (c) CortelF 2023</Copyright>
+    <Version>0.0.2</Version>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <PackageTags>telegram,telegram bot</PackageTags>
+    <PackageTags>telegram,telegram-bot</PackageTags>
     <PackageProjectUrl>https://github.com/cortelf/Stella</PackageProjectUrl>
     <RepositoryUrl>https://github.com/cortelf/Stella</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <Title>Stella - The framework for Telegram Bot development</Title>
+    <Description>Convenient and pleasant framework for developing Telegram bots on .NET</Description>
   </PropertyGroup>
 
   <ItemGroup>
-	  <None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
 	  <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
 	  <PackageReference Include="Telegram.Bot" Version="18.0.0" />
   </ItemGroup>
