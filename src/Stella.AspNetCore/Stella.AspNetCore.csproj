@@ -5,7 +5,6 @@
         <Nullable>enable</Nullable>
 		<IsPackable>true</IsPackable>
         <OutputType>Library</OutputType>
-        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Authors>CortelF</Authors>
 		<Copyright>Copyright (c) CortelF 2025</Copyright>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>

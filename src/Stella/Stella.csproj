@@ -3,7 +3,6 @@
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>CortelF</Authors>
     <Copyright>Copyright (c) CortelF 2025</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
