@@ -39,5 +39,5 @@ jobs:
         name: Dotnet pack
       - name: Nuget push
         run: |
-          dotnet nuget push --output ${{ env.PublishDirectory }}/*.nupkg --api-key ${{secrets.NUGET_KEY}} --skip-duplicate --source https://api.nuget.org/v3/index.json
-          dotnet nuget push --output ${{ env.PublishDirectory }}/*.snupkg --api-key ${{secrets.NUGET_KEY}} --skip-duplicate --source https://api.nuget.org/v3/index.
+          dotnet nuget push ${{ env.PublishDirectory }}/*.nupkg --api-key ${{secrets.NUGET_KEY}} --skip-duplicate --source https://api.nuget.org/v3/index.json
+          dotnet nuget push ${{ env.PublishDirectory }}/*.snupkg --api-key ${{secrets.NUGET_KEY}} --skip-duplicate --source https://api.nuget.org/v3/index.json
