@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>dotnet-Stella.Examples.Polling-57276cc9-ebe7-446c-b9b9-eaa4dc6ad984</UserSecretsId>
     </PropertyGroup>
