@@ -1,5 +1,10 @@
 ﻿# Stella – A Convenient Library for Writing Telegram Bots in MVC Style
 
+![NuGet Version](https://img.shields.io/nuget/v/Stella?style=flat&label=Stella)
+![NuGet Version](https://img.shields.io/nuget/v/Stella.AspNetCore?style=flat&label=Stella.AspNetCore)
+![NuGet Version](https://img.shields.io/nuget/v/Stella.Polling?style=flat&label=Stella.Polling)
+![GitHub License](https://img.shields.io/github/license/cortelf/Stella)
+
 ### Getting Started
 
 ##### Install the NuGet package
