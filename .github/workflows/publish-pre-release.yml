@@ -1,0 +1,43 @@
+﻿name: publish-pre-release
+on:
+  workflow_dispatch:
+    inputs:
+      releaseType:
+        description: 'Pre-release type'
+        required: true
+        default: 'alpha'
+        type: choice
+        options:
+          - alpha
+          - beta
+          - rc
+      releaseIndex:
+        description: "Pre-release index"
+        required: true
+        default: 0
+        type: number
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_NOLOGO: true
+  PublishDirectory: ${{ github.workspace}}/publish
+
+jobs: 
+  pack_nuget:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "VersionPrefix=$(jq -r '"\(.major).\(.minor).\(.patch)"' version.json)" >> $GITHUB_ENV
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x.x'
+      - run: dotnet pack --configuration Release --output ${{ env.PublishDirectory }} -v d --include-symbols --version-suffix ${{ github.event.inputs.releaseType }}-${{ github.event.inputs.releaseIndex }}  /p:VersionPrefix=${{env.VersionPrefix}} /p:SymbolPackageFormat=snupkg
+        name: Dotnet pack
+      - name: Nuget push
+        run: |
+          dotnet nuget push --output ${{ env.PublishDirectory }}/*.nupkg --api-key ${{secrets.NUGET_KEY}} --skip-duplicate --source https://api.nuget.org/v3/index.json
+          dotnet nuget push --output ${{ env.PublishDirectory }}/*.snupkg --api-key ${{secrets.NUGET_KEY}} --skip-duplicate --source https://api.nuget.org/v3/index.

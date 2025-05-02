@@ -7,7 +7,6 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Authors>CortelF</Authors>
 		<Copyright>Copyright (c) CortelF 2025</Copyright>
-        <Version>0.1.0</Version>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageTags>telegram,telegram-bot</PackageTags>
