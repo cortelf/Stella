@@ -1,22 +1,7 @@
-﻿name: publish-pre-release
+﻿name: publish-release
 on:
   workflow_dispatch:
-    inputs:
-      releaseType:
-        description: 'Pre-release type'
-        required: true
-        default: 'alpha'
-        type: choice
-        options:
-          - alpha
-          - beta
-          - rc
-      releaseIndex:
-        description: "Pre-release index"
-        required: true
-        default: 0
-        type: number
-
+  
 defaults:
   run:
     shell: bash
@@ -26,7 +11,7 @@ env:
   DOTNET_NOLOGO: true
   PublishDirectory: ${{ github.workspace}}/publish
 
-jobs: 
+jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
@@ -35,7 +20,7 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.x.x'
-      - run: dotnet pack --configuration Release --output ${{ env.PublishDirectory }} --include-symbols --version-suffix ${{ github.event.inputs.releaseType }}.${{ github.event.inputs.releaseIndex }}  /p:VersionPrefix=${{env.VersionPrefix}} /p:SymbolPackageFormat=snupkg
+      - run: dotnet pack --configuration Release --output ${{ env.PublishDirectory }} --include-symbols  /p:Version=${{env.VersionPrefix}} /p:SymbolPackageFormat=snupkg
         name: Dotnet pack
       - name: Nuget push
         run: |
