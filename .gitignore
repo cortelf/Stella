@@ -402,3 +402,5 @@ FodyWeavers.xsd
 # Launch Settings (with secrets)
 launchSettings.json
 appsettings.*.json
+
+http-client.private.env.json

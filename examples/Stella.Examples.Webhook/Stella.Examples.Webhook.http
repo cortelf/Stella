@@ -1,0 +1,100 @@
+@Webhook_HostAddress = http://localhost:5000
+
+POST {{Webhook_HostAddress}}/webhook/
+Content-Type: application/json
+
+{
+  "update_id": 1,
+  "message": {
+    "message_id": 1,
+    "from": {
+      "id": {{ChatId}},
+      "is_bot": false,
+      "first_name": "Test Test",
+      "username": "Test",
+      "language_code": "en",
+      "is_premium": true
+    },
+    "chat": {
+      "id": {{ChatId}},
+      "first_name": "Test Test",
+      "username": "Test",
+      "type": "private"
+    },
+    "date": 1746204491,
+    "text": "/start",
+    "entities": [
+      {
+        "offset": 0,
+        "length": 6,
+        "type": "bot_command"
+      }
+    ]
+  }
+}
+
+###
+
+POST {{Webhook_HostAddress}}/webhook/
+Content-Type: application/json
+
+{
+  "update_id": 1,
+  "message": {
+    "message_id": 1,
+    "from": {
+      "id": {{ChatId}},
+      "is_bot": false,
+      "first_name": "Test Test",
+      "username": "Test",
+      "language_code": "en",
+      "is_premium": true
+    },
+    "chat": {
+      "id": {{ChatId}},
+      "first_name": "Test Test",
+      "username": "Test",
+      "type": "private"
+    },
+    "date": 1746204491,
+    "text": "/help",
+    "entities": [
+      {
+        "offset": 0,
+        "length": 5,
+        "type": "bot_command"
+      }
+    ]
+  }
+}
+
+###
+
+POST {{Webhook_HostAddress}}/webhook/
+Content-Type: application/json
+
+{
+  "update_id": 1,
+  "message": {
+    "message_id": 1,
+    "from": {
+      "id": {{ChatId}},
+      "is_bot": false,
+      "first_name": "Test Test",
+      "username": "Test",
+      "language_code": "en",
+      "is_premium": true
+    },
+    "chat": {
+      "id": {{ChatId}},
+      "first_name": "Test Test",
+      "username": "Test",
+      "type": "private"
+    },
+    "date": 1746204491,
+    "text": "start",
+    "entities": []
+  }
+}
+
+###
