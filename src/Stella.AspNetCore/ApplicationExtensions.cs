@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
-using Stella.Interfaces;
+using Stella.Routing;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 

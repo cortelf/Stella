@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using Stella.Interfaces;
+using Stella.Routing;
 using Telegram.Bot;
-using Telegram.Bot.Types.Enums;
 
 namespace Stella.Polling;
 

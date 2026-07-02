@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="examples/Stella.Examples.Polling/Stella.Examples.Polling.csproj" />
+  <Project Path="examples/Stella.Examples.Webhook/Stella.Examples.Webhook.csproj" />
+  <Project Path="src/Stella.AspNetCore/Stella.AspNetCore.csproj" />
+  <Project Path="src/Stella.Polling/Stella.Polling.csproj" />
+  <Project Path="src/Stella/Stella.csproj" />
+  <Project Path="tests/Stella.Tests/Stella.Tests.csproj" />
+</Solution>
