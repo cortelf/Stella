@@ -17,8 +17,8 @@ internal class BotEndpointRouter(IServiceProvider serviceProvider, BotEndpointRo
         foreach (var handlerDescriptor in configuration.HandlerDescriptors.OrderBy(x => x.Priority))
         {
             var conditionContainers = handlerDescriptor.ConditionDescriptors.Select(x =>
-                new ConditionContainer((IAsyncCondition)serviceProvider.GetRequiredService(x.ConditionType), x.Context));
-            var handlerCandidate = (IUpdateHandler)serviceProvider.GetRequiredService(handlerDescriptor.HandlerType);
+                new ConditionContainer((IAsyncCondition)scope.ServiceProvider.GetRequiredService(x.ConditionType), x.Context));
+            var handlerCandidate = (IUpdateHandler)scope.ServiceProvider.GetRequiredService(handlerDescriptor.HandlerType);
             handlerCandidate.Conditions = conditionContainers.OrderBy(x => x.Condition.Priority).ToList();
             if (await handlerCandidate.CanHandleAsync(update, cancellationToken))
             {
@@ -33,7 +33,7 @@ internal class BotEndpointRouter(IServiceProvider serviceProvider, BotEndpointRo
         
         var middlewareContainers = endpointDescriptor!.MiddlewareDescriptors
             .Union(configuration.GlobalMiddlewareDescriptors).Select(x =>
-            new MiddlewareContainer((IAsyncMiddleware)serviceProvider.GetRequiredService(x.MiddlewareType), x.Context));
+            new MiddlewareContainer((IAsyncMiddleware)scope.ServiceProvider.GetRequiredService(x.MiddlewareType), x.Context));
         handler.Middlewares = middlewareContainers.OrderBy(x => x.Middleware.Priority).ToList();
         await handler.HandleAsync(update, cancellationToken);
     }
