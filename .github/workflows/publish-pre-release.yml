@@ -29,15 +29,23 @@ env:
 jobs: 
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - run: echo "VersionPrefix=$(jq -r '"\(.major).\(.minor).\(.patch)"' version.json)" >> $GITHUB_ENV
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.x.x'
+          dotnet-version: '10.x.x'
       - run: dotnet pack --configuration Release --output ${{ env.PublishDirectory }} --include-symbols --version-suffix ${{ github.event.inputs.releaseType }}.${{ github.event.inputs.releaseIndex }}  /p:VersionPrefix=${{env.VersionPrefix}} /p:SymbolPackageFormat=snupkg
         name: Dotnet pack
+      - name: NuGet login (trusted publishing)
+        uses: NuGet/login@v1
+        id: nuget-login
+        with:
+          user: ${{ secrets.NUGET_USER }}
       - name: Nuget push
         run: |
-          dotnet nuget push ${{ env.PublishDirectory }}/*.nupkg --api-key ${{secrets.NUGET_KEY}} --skip-duplicate --source https://api.nuget.org/v3/index.json
-          dotnet nuget push ${{ env.PublishDirectory }}/*.snupkg --api-key ${{secrets.NUGET_KEY}} --skip-duplicate --source https://api.nuget.org/v3/index.json
+          dotnet nuget push ${{ env.PublishDirectory }}/*.nupkg --api-key ${{ steps.nuget-login.outputs.NUGET_API_KEY }} --skip-duplicate --source https://api.nuget.org/v3/index.json
+          dotnet nuget push ${{ env.PublishDirectory }}/*.snupkg --api-key ${{ steps.nuget-login.outputs.NUGET_API_KEY }} --skip-duplicate --source https://api.nuget.org/v3/index.json
